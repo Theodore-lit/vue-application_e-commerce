@@ -1,7 +1,8 @@
 <script setup>
 import { RouterView } from "vue-router";
 import NavigationView from "./views/NavigationView.vue";
-import { onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
+import MessageView from "./views/MessageView.vue";
 
 let products = [];
 async function loader() {
@@ -13,16 +14,31 @@ async function loader() {
 }
 onMounted(() => {
   loader();
+  // notification();
 });
+
+
+let notifAdd = ref();
+function notification() {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  notifAdd.value = cart.length;
+}
 </script>
 
 <template>
   <div class="main">
+    <MessageView />
     <div class="nav">
-      <NavigationView />
+      <NavigationView :notifAdd="notifAdd" />
     </div>
     <div class="container">
-      <RouterView  />
+      <router-view v-slot="{ Component }">
+        <component
+        :is="Component"
+          @addNotif="notification"
+          @remove="notification"
+        />
+      </router-view>
     </div>
   </div>
 </template>

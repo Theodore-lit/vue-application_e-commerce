@@ -46,12 +46,16 @@
       </div>
     </aside>
     <div class="allProducts">
-      <ProductCard />
+      <ProductCard @addNotif="addNotif" />
     </div>
   </div>
 </template>
 <script setup>
 import ProductCard from "@/components/ProductCard.vue";
+const emit = defineEmits(['addNotif'])
+function addNotif(){
+    emit('addNotif')
+}
 </script>
 <style scoped>
 /* aside { */

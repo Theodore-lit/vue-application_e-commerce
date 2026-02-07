@@ -33,16 +33,16 @@
         Détails
       </button>
 
-      <input
+      <!-- <input
         type="number"
         min="1"
         v-model="quantity"
         placeholder="Qté"
         class="w-20 px-3 border rounded-full focus:outline-none"
-      />
+      /> -->
 
       <button
-        @click="toAdd(product.id, quantity)"
+        @click="toAdd(product.id)"
         class="ml-auto px-5 py-1  bg-green-600 text-white rounded-full cursor-pointer hover:bg-indigo-500 transition"
       >
         Ajouter
@@ -65,9 +65,12 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
+// let props = defineEmits(["products"]);
 let products = JSON.parse(localStorage.getItem("products"));
 let quantity = ref(1);
+const emit = defineEmits(['addNotif'])
 function toAdd(id) {
+    emit('addNotif')
   let product = {
     prod: products.find((x) => x.id == id),
     quantity: quantity.value
