@@ -67,13 +67,13 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 // let props = defineEmits(["products"]);
 let products = JSON.parse(localStorage.getItem("products"));
-let quantity = ref(1);
+let quantity;
 const emit = defineEmits(['addNotif'])
 function toAdd(id) {
     emit('addNotif')
   let product = {
     prod: products.find((x) => x.id == id),
-    quantity: quantity.value
+    quantity: quantity
   }
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   if (!cart.find((x) => x.prod.id == id)) {

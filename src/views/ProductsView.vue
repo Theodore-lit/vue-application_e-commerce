@@ -14,43 +14,32 @@
         <div class="flex flex-col">
           <p
             class="my-2 w-0 cursor-pointer font-bold text-base text-[#5323d4] hover:text-[#b60303]"
-            id="all"
+            @click="products = [...allProducts]"
           >
             All
           </p>
-          <p
+          <p v-for="category in categories" @click="toFilter(category)"
             class="my-2 w-0 cursor-pointer font-bold text-base text-[#5323d4] hover:text-[#b60303]"
-            id="beauty"
           >
-            Beauty
-          </p>
-          <p
-            class="my-2 w-0 cursor-pointer font-bold text-base text-[#5323d4] hover:text-[#b60303]"
-            id="furniture"
-          >
-            Furtinure
-          </p>
-          <p
-            class="my-2 w-0 cursor-pointer font-bold text-base text-[#5323d4] hover:text-[#b60303]"
-            id="grocerie"
-          >
-            Groceries
-          </p>
-          <p
-            class="my-2 w-0 cursor-pointer font-bold text-base text-[#5323d4] hover:text-[#b60303]"
-            id="fragrance"
-          >
-            Fragrances
+            {{category}}
           </p>
         </div>
       </div>
     </aside>
     <div class="allProducts">
-      <ProductCard @addNotif="addNotif" />
+      <ProductCard :products="products" @addNotif="addNotif" />
     </div>
   </div>
 </template>
 <script setup>
+import { ref } from "vue";
+let allProducts = JSON.parse(localStorage.getItem("products"));
+let categories = new Set();
+allProducts.forEach(x => categories.add(x.category));
+let products = [...allProducts]
+function toFilter(ctg) {
+  products = allProducts.filter(x => x.category == ctg)
+}
 import ProductCard from "@/components/ProductCard.vue";
 const emit = defineEmits(['addNotif'])
 function addNotif(){
