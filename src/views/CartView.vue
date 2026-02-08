@@ -13,8 +13,8 @@ import PayementForm from "@/components/PayementForm.vue";
 import { computed, ref } from "vue";
 let cart = ref(JSON.parse(localStorage.getItem("cart")));
 const emit = defineEmits(['remove'])
-function toRemove(id) {
-    emit('remove')
+function toRemove(removeMsg,type,id) {
+    emit('remove',removeMsg,type)
   cart.value = cart.value.filter((x) => x.prod.id != id);
   localStorage.setItem("cart", JSON.stringify(cart.value));
 }

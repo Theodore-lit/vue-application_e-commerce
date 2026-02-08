@@ -17,17 +17,22 @@ onMounted(() => {
   // notification();
 });
 
-
+let msg = ref('');
 let notifAdd = ref();
-function notification() {
+let messageType = ref();
+function notification(message,type) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   notifAdd.value = cart.length;
+  messageType.value = message;
+  status?value = type
+  setTimeout(()=> {msg.value ==""}, 3000)
 }
+
 </script>
 
 <template>
   <div class="main">
-    <MessageView />
+    <MessageView :messageType="messageType" :msg="msg" />
     <div class="nav">
       <NavigationView :notifAdd="notifAdd" />
     </div>

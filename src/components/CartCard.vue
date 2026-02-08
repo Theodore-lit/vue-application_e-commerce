@@ -17,7 +17,7 @@
       <p class="total">
         Total: ${{ Number(product.prod.price) * Number(product.quantity) }}
       </p>
-      <button class="supp mt-2" @click="toRemove(product.prod.id)">
+      <button class="supp mt-2" @click="toRemove('Produit supprmié avec sucess',false,product.prod.id)">
         Supprimer
       </button>
     </div>
@@ -30,8 +30,8 @@ const props = defineProps({
 })
 const emit = defineEmits(['toRemove'])
 
-function toRemove(id){
-    emit('toRemove', id)
+function toRemove(removeMsg,type,id){
+    emit('toRemove',removeMsg,type,id)
 }
 </script>
 <style scoped>

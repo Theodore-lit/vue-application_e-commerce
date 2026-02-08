@@ -27,7 +27,7 @@
       </div>
     </aside>
     <div class="allProducts">
-      <ProductCard :products="products" @addNotif="addNotif" />
+      <ProductCard :products="products" @addNotif="addNotif(Produit ajouté avec sucess,true)" />
     </div>
   </div>
 </template>
@@ -42,8 +42,8 @@ function toFilter(ctg) {
 }
 import ProductCard from "@/components/ProductCard.vue";
 const emit = defineEmits(['addNotif'])
-function addNotif(){
-    emit('addNotif')
+function addNotif(add, type){
+    emit('addNotif',add,type)
 }
 </script>
 <style scoped>
