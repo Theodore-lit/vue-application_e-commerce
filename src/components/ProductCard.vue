@@ -42,7 +42,7 @@
       /> -->
 
       <button
-        @click="toAdd(product.id)"
+        @click="toAdd('Produit ajouté avec sucess',true,product.id)"
         class="ml-auto px-5 py-1  bg-green-600 text-white rounded-full cursor-pointer hover:bg-indigo-500 transition"
       >
         Ajouter
@@ -64,25 +64,27 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+let msg = ref('');
 const router = useRouter();
 const props = defineProps({
   products: Array,
 })
 // let products = JSON.parse(localStorage.getItem("products"));
-let quantity;
+let quantity = ref();
 const emit = defineEmits(['addNotif'])
-function toAdd(id) {
-    emit('addNotif')
+function toAdd(add,type,id) {
   let product = {
     prod: props.products.find((x) => x.id == id),
-    quantity: quantity
+    quantity: quantity.value
   }
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   if (!cart.find((x) => x.prod.id == id)) {
     cart.push(product);
   } else {
+    add = "Ce produit est déjà present dans votre panier"
     console.log("Ce produit est déjà present dans votre panier");
   }
+  emit('addNotif',add,type,id)
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
