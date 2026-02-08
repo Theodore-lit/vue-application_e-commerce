@@ -1,5 +1,5 @@
 <template>
-  <div v-for="product in products" :key="product.id" class="product">
+  <div v-for="product in props.products" :key="product.id" class="product">
     <div class="productInfo flex flex-col w-2/3 gap-2 rounded-2xl shadow-md hover:shadow-xl transition p-5">
 
     <h3 class="text-xl text-indigo-800 font-semibold line-clamp-2 w-full">
@@ -65,14 +65,16 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 const router = useRouter();
-// let props = defineEmits(["products"]);
-let products = JSON.parse(localStorage.getItem("products"));
+const props = defineProps({
+  products: Array,
+})
+// let products = JSON.parse(localStorage.getItem("products"));
 let quantity;
 const emit = defineEmits(['addNotif'])
 function toAdd(id) {
     emit('addNotif')
   let product = {
-    prod: products.find((x) => x.id == id),
+    prod: props.products.find((x) => x.id == id),
     quantity: quantity
   }
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -87,7 +89,7 @@ function toAdd(id) {
 function detail(id) {
   router.push({ name: "product-details" });
   let currProd = JSON.parse(localStorage.getItem("currProd")) || [];
-  currProd = products.find((x) => x.id == id);
+  currProd = props.products.find((x) => x.id == id);
   localStorage.setItem("currProd", JSON.stringify(currProd));
 }
 
