@@ -33,13 +33,13 @@
         Détails
       </button>
 
-      <!-- <input
+      <input
         type="number"
         min="1"
         v-model="quantity"
         placeholder="Qté"
         class="w-20 px-3 border rounded-full focus:outline-none"
-      /> -->
+      />
 
       <button
         @click="toAdd('Produit ajouté avec sucess',true,product.id)"
@@ -64,13 +64,13 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-let msg = ref('');
+// let msg = ref('');
 const router = useRouter();
 const props = defineProps({
   products: Array,
 })
 // let products = JSON.parse(localStorage.getItem("products"));
-let quantity = ref();
+let quantity = ref(1);
 const emit = defineEmits(['addNotif'])
 function toAdd(add,type,id) {
   let product = {

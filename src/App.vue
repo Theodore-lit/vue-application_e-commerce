@@ -20,11 +20,12 @@ onMounted(() => {
 let msg = ref('');
 let notifAdd = ref();
 let messageType = ref();
+// let status =ref('')
 function notification(message,type) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   notifAdd.value = cart.length;
-  messageType.value = message;
-  status?value = type
+  msg.value = message;
+  messageType.value = type;
   setTimeout(()=> {msg.value ==""}, 3000)
 }
 

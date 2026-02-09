@@ -1,16 +1,17 @@
 import CartView from "@/views/CartView.vue";
 import HistoryView from "@/views/HistoryView.vue";
 import Login from "@/views/LoginView.vue";
-import Sign from "@/views/Sign.vue";
+import Sign from "@/views/SignView.vue";
 import HomeView from "@/views/HomeView.vue";
 import ProductDetailsView from "@/views/ProductDetailsView.vue";
 import ProductsView from "@/views/ProductsView.vue";
+// import NotFoundView from "@/views/NotFoundView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   { path: "/", redirect: { name: "home" } },
   { path: "/home", name: "home", component: HomeView },
-  { path: "/:pathMatch(./*)*", name: "not-found", component: NotFound },
+  // { path: "/:pathMatch(./*)*", name: "not-found", component: NotFoundView },
   {
     path: "/products",
     name: "products",

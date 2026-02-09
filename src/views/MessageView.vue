@@ -1,6 +1,5 @@
 <template>
-    <div>Message</div>
-  <div :class="props.messageType ? 'text-[green]': 'text-[red]'" >{{ props.msg }}</div>
+  <div :class="props.messageType ? 'text-[green]': 'text-[red]'"  class="text-center absolute top-[25%] left-[50%] ">{{ props.msg }}</div>
 </template>
 <script setup>
 const props = defineProps({
